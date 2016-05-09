@@ -19,7 +19,7 @@
     </div>
 
     <div style ="float:left; width:573px; height:200px; width:70%;">
-        <center><img src="telefon.gif" alt="Kontakt" style="width:201px; height:195px; "></center>
+        <center><img src="Images/telefon.gif" alt="Kontakt" style="width:201px; height:195px; "></center>
     </div> 
 
 </asp:Content>

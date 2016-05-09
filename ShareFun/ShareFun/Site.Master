@@ -16,7 +16,7 @@
 
 </head>
 
-<body background="tło.jpg">
+<body background="Images/tło.jpg">
     <div style="background-color: none; class="container body-content">
          <center><img src="Images/logo.png"/></center>
     </div>
