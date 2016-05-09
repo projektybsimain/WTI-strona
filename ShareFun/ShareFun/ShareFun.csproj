@@ -187,6 +187,10 @@
     <Content Include="AddPhoneNumber.aspx" />
     <Content Include="Confirm.aspx" />
     <Content Include="Forgot.aspx" />
+    <Content Include="Images\logo.png" />
+    <Content Include="Images\telefon.gif" />
+    <Content Include="Images\tlo_menu.jpg" />
+    <Content Include="Images\tło.jpg" />
     <Content Include="Lockout.aspx" />
     <Content Include="Manage.aspx" />
     <Content Include="ManageLogins.aspx" />

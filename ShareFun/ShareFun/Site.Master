@@ -18,7 +18,7 @@
 
 <body background="tło.jpg">
     <div style="background-color: none; class="container body-content">
-         <center><img src="logo.png"/></center>
+         <center><img src="Images/logo.png"/></center>
     </div>
     <form runat="server">
         <asp:ScriptManager runat="server">
