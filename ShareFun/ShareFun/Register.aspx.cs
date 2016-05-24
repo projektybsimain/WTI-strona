@@ -6,6 +6,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Owin;
 using ShareFun.Models;
+using System.Diagnostics;
 
 namespace ShareFun.Account
 {
@@ -13,10 +14,20 @@ namespace ShareFun.Account
     {
         protected void CreateUser_Click(object sender, EventArgs e)
         {
-            var manager = Context.GetOwinContext().GetUserManager<ApplicationUserManager>();
+            ApplicationUserManager manager = Context.GetOwinContext().GetUserManager<ApplicationUserManager>();
             var signInManager = Context.GetOwinContext().Get<ApplicationSignInManager>();
             var user = new ApplicationUser() { UserName = Email.Text, Email = Email.Text };
-            IdentityResult result = manager.Create(user, Password.Text);
+            IdentityResult result = null;
+            
+            try
+            {
+                result = manager.Create(user, Password.Text);
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("EXCEPTION: " + ex.Message);
+            }
+
             if (result.Succeeded)
             {
                 // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771

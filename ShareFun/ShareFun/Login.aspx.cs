@@ -43,12 +43,12 @@ namespace ShareFun.Account
                     case SignInStatus.LockedOut:
                         Response.Redirect("/Account/Lockout");
                         break;
-                    case SignInStatus.RequiresVerification:
+                    /*case SignInStatus.RequiresVerification:
                         Response.Redirect(String.Format("/Account/TwoFactorAuthenticationSignIn?ReturnUrl={0}&RememberMe={1}", 
                                                         Request.QueryString["ReturnUrl"],
                                                         RememberMe.Checked),
                                           true);
-                        break;
+                        break;*/
                     case SignInStatus.Failure:
                     default:
                         FailureText.Text = "Invalid login attempt";
