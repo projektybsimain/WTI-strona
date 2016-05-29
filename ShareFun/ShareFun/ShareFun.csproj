@@ -274,7 +274,9 @@
     <Compile Include="AddPhoneNumber.aspx.designer.cs">
       <DependentUpon>AddPhoneNumber.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Classes\Database.cs" />
+    <Compile Include="Classes\ApplicationUserStore.cs" />
+    <Compile Include="Classes\SqlDatabase.cs" />
+    <Compile Include="Classes\UserTable.cs" />
     <Compile Include="Confirm.aspx.cs">
       <DependentUpon>Confirm.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
