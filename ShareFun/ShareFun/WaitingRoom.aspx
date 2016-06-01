@@ -1,6 +1,7 @@
-﻿<%@ Page Title="Best" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Best.aspx.cs" Inherits="ShareFun.About" %>
+﻿<%@ Page Title="Waiting Room" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="WaitingRoom.aspx.cs" MaintainScrollPositionOnPostBack="true" Inherits="ShareFun.WaitingRoom" %>
 
 <asp:Content ContentPlaceHolderID="MainContent" runat="server">
+
 <style>
 #header {
     background-color:#F0F0F0;

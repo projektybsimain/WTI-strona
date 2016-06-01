@@ -16,10 +16,7 @@
 
 </head>
 
-<body background="Images/tło.jpg">
-    <div style="background-color: none; class="container body-content">
-         <center><img src="Images/logo.png"/></center>
-    </div>
+<body>
     <form runat="server">
         <asp:ScriptManager runat="server">
             <Scripts>
@@ -43,7 +40,7 @@
         </asp:ScriptManager>
 
 
-        <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="navbar navbar-default navbar-fixed-top">
             <div class="container">
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -55,20 +52,20 @@
                     <ul class="nav navbar-nav">
                         <li><a runat="server" href="~/">Home</a></li>
                         <li><a runat="server" href="~/Best">Best</a></li>
-                        <li><a runat="server" href="~/Trending">Trending</a></li>
-                        <li><a runat="server" href="~/Anteroom">Anteroom</a></li>
+                        <li><a runat="server" href="~/WaitingRoom">Waiting Room</a></li>
                         <li><a runat="server" href="~/Contact">Contact</a></li>
                     </ul>
                     <asp:LoginView runat="server" ViewStateMode="Disabled">
                         <AnonymousTemplate>
                             <ul class="nav navbar-nav navbar-right">
-                                <li><a runat="server" href="Register">Sign up</a></li>
-                                <li><a runat="server" href="Login">Log in</a></li>
+                                <li><a runat="server" href="~/Account/Register">Sign up</a></li>
+                                <li><a runat="server" href="~/Account/Login">Log in</a></li>
                             </ul>
                         </AnonymousTemplate>
                         <LoggedInTemplate>
                             <ul class="nav navbar-nav navbar-right">
-                                <li><a runat="server" href="Manage" title="Manage your account">Hello, <%: Context.User.Identity.GetUserName()  %> !</a></li>
+                                <li><a runat="server" href="NewPost">Add new post</a></li>
+                                <li><a runat="server" href="/Account/Manage" title="Manage your account">Hello, <%: Context.User.Identity.GetUserName()  %> !</a></li>
                                 <li>
                                     <asp:LoginStatus runat="server" LogoutAction="Redirect" LogoutText="Log off" LogoutPageUrl="~/" OnLoggingOut="Unnamed_LoggingOut" />
                                 </li>

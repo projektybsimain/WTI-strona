@@ -2,21 +2,30 @@
 using ShareFun.Classes;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Web;
 using System.Web.UI;
 
 namespace ShareFun
 {
-    public partial class About : Page
+    public partial class WaitingRoom : System.Web.UI.Page
     {
         Stack<Post> posts;
         bool canSeePostSettings;
+        string userID;
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            canSeePostSettings = false;
+            if (User.Identity.IsAuthenticated)
+            {
+                ApplicationUserManager manager = Context.GetOwinContext().GetUserManager<ApplicationUserManager>();
+                userID = ApplicationUserStore.GetUserIDByName(manager, User);
+            }
             DisplayPosts();
             if (Page.IsPostBack)
             {
+                string postID = Request["__EVENTARGUMENT"];
                 if (Request["__EVENTTARGET"] == "starClick")
                 {
                     if (!User.Identity.IsAuthenticated)
@@ -24,10 +33,19 @@ namespace ShareFun
                         Response.Redirect(Page.ResolveUrl("~/Account/Login"));
                         return;
                     }
-                    ApplicationUserManager manager = Context.GetOwinContext().GetUserManager<ApplicationUserManager>();
-                    string userID = ApplicationUserStore.GetUserIDByName(manager, User);
-                    string postID = Request["__EVENTARGUMENT"];
                     UpdateStarsCount(postID, userID);
+                }
+                else if (Request["__EVENTTARGET"] == "acceptPost")
+                {
+                    SqlDatabase database = new SqlDatabase();
+                    PostsTable postsTable = new PostsTable(database);
+                    postsTable.AcceptPost(postID);
+                }
+                else if (Request["__EVENTTARGET"] == "removePost")
+                {
+                    SqlDatabase database = new SqlDatabase();
+                    PostsTable postsTable = new PostsTable(database);
+                    postsTable.RemovePost(postID);
                 }
             }
         }
@@ -48,9 +66,9 @@ namespace ShareFun
             {
                 SqlDatabase database = new SqlDatabase();
                 PostsTable postsTable = new PostsTable(database);
-                posts = postsTable.GetBestPosts();
+                posts = postsTable.GetPendingPosts();
                 UserTable userTable = new UserTable(database);
-                canSeePostSettings = userTable.CanSeePostSettings(null);
+                canSeePostSettings = userTable.CanSeePostSettings(userID);
             }
             for (int i = 0; i < 20; i++)
             {

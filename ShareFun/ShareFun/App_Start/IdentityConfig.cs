@@ -7,6 +7,9 @@ using Microsoft.Owin;
 using Microsoft.Owin.Security;
 using ShareFun.Models;
 using ShareFun.Classes;
+using System.Diagnostics;
+using System.Net.Mail;
+using System.Net;
 
 namespace ShareFun
 {
@@ -14,7 +17,26 @@ namespace ShareFun
     {
         public Task SendAsync(IdentityMessage message)
         {
-            // Plug in your email service here to send an email.
+            var fromAddress = new MailAddress("verifysharefun@gmail.com", "ShareFun Verification");
+            var toAddress = new MailAddress(message.Destination);
+
+            var smtp = new SmtpClient
+            {
+                Host = "smtp.gmail.com",
+                Port = 587,
+                EnableSsl = true,
+                DeliveryMethod = SmtpDeliveryMethod.Network,
+                UseDefaultCredentials = false,
+                Credentials = new NetworkCredential(fromAddress.Address, "oagn9297gbbIB8b28b")
+            };
+            using (var mailMessage = new MailMessage(fromAddress, toAddress)
+            {
+                Subject = message.Subject,
+                Body = message.Body
+            })
+            {
+                smtp.Send(mailMessage);
+            }
             return Task.FromResult(0);
         }
     }
@@ -27,8 +49,8 @@ namespace ShareFun
 
         public static ApplicationUserManager Create(IdentityFactoryOptions<ApplicationUserManager> options, IOwinContext context)
         {
-            var manager = new ApplicationUserManager(new ApplicationUserStore());
-            
+            ApplicationUserManager manager = new ApplicationUserManager(new ApplicationUserStore());
+
             manager.UserValidator = new UserValidator<ApplicationUser>(manager)
             {
                 AllowOnlyAlphanumericUserNames = false,
@@ -44,13 +66,7 @@ namespace ShareFun
                 RequireUppercase = false,
             };
 
-            manager.RegisterTwoFactorProvider("Email Code", new EmailTokenProvider<ApplicationUser>
-            {
-                Subject = "Security Code",
-                BodyFormat = "Your security code is {0}"
-            });
-
-            manager.UserLockoutEnabledByDefault = true;
+            manager.UserLockoutEnabledByDefault = false;
             manager.DefaultAccountLockoutTimeSpan = TimeSpan.FromMinutes(5);
             manager.MaxFailedAccessAttemptsBeforeLockout = 5;
 

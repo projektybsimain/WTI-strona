@@ -10,7 +10,7 @@
 namespace ShareFun {
     
     
-    public partial class _Default {
+    public partial class WaitingRoom {
         
         /// <summary>
         /// PostsTableView control.

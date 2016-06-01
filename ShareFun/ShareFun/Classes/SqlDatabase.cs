@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
-using System.Diagnostics;
 
 public class SqlDatabase
 {
@@ -32,20 +30,6 @@ public class SqlDatabase
 
     public bool ExecuteScalar(string commandText, Dictionary<string, object> parameters)
     {
-        /*using (SqlConnection connection = new SqlConnection(ConnectionString))
-        {
-            try
-            {
-                SqlCommand command = CreateCommand(connection, commandText, parameters);
-                connection.Open();
-                return command.ExecuteScalar() != null;
-            }
-            finally
-            {
-                connection.Close();
-            }
-        }*/
-
         using (SqlCommand command = CreateCommand(commandText, parameters))
         {
             try
@@ -71,38 +55,27 @@ public class SqlDatabase
 
     private void OpenConnection()
     {
-        if (connection.State == ConnectionState.Open)
-        {
-            return;
-        }
-        else
-        {
+        if (connection.State != ConnectionState.Open)
             connection.Open();
-        }
     }
 
     public void CloseConnection()
     {
         if (connection.State == ConnectionState.Open)
-        {
             connection.Close();
-        }
     }
 
     private SqlCommand CreateCommand(string commandText, Dictionary<string, object> parameters)
     {
         SqlCommand command = new SqlCommand(commandText, connection);
         AddParameters(command, parameters);
-
         return command;
     }
 
     private void AddParameters(SqlCommand command, Dictionary<string, object> parameters)
     {
         if (parameters == null)
-        {
             return;
-        }
 
         foreach (var param in parameters)
         {

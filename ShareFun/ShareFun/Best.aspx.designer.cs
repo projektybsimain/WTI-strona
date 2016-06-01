@@ -11,5 +11,23 @@ namespace ShareFun {
     
     
     public partial class About {
+        
+        /// <summary>
+        /// PostsTableView control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Table PostsTableView;
+        
+        /// <summary>
+        /// LoadMore control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button LoadMore;
     }
 }
