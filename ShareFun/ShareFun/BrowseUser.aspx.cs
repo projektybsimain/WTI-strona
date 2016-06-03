@@ -28,10 +28,10 @@ namespace ShareFun
             ApplicationUserStore userStore = new ApplicationUserStore();
             Task<ApplicationUser> userTask = userStore.FindByNameAsync(userName);
             userID = userTask.Result.Id;
+            string date = users.GetRegistrationDate(userID);
 
             NameLabel.Text = "Name: " + userName;
-            RegisteredLabel.Text = "Registration date: ";
-            StarsCountLabel.Text = "Total stars earned: ";
+            RegisteredLabel.Text = "Registration date: " + date;
 
             DisplayPosts();
             if (Page.IsPostBack)
@@ -49,6 +49,7 @@ namespace ShareFun
                     UpdateStarsCount(postID, _userID);
                 }
             }
+            database.CloseConnection();
         }
 
         private void UpdateStarsCount(string postID, string userID)

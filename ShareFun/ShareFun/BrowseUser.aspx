@@ -27,9 +27,8 @@ margin-bottom: 25px;
 </style> 
 
     <h2><%: Title %></h2>
-    <asp:Label ID="NameLabel" runat="server" Text="NULL" CssClass="lead"></asp:Label>
-    <asp:Label ID="RegisteredLabel" runat="server" Text="NULL" CssClass="lead"></asp:Label>
-    <asp:Label ID="StarsCountLabel" runat="server" Text="NULL" CssClass="lead"></asp:Label>
+    <asp:Label ID="NameLabel" runat="server" Text="NULL" CssClass="lead" Font-Size="14"></asp:Label></br>
+    <asp:Label ID="RegisteredLabel" runat="server" Text="NULL" CssClass="lead" Font-Size="14"></asp:Label></br></br>
     <asp:Label ID="UserPostsLabel" runat="server" Visible="false" Text="NULL" CssClass="lead"></asp:Label>
     <asp:Table ID="PostsTableView" runat="server" Width="600" CssClass=""></asp:Table>
     <asp:Button ID="LoadMore" CssClass="btn btn-primary" runat="server" Text="Load more posts" OnClick="LoadMore_Click" />

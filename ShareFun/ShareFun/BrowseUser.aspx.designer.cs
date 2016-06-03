@@ -31,15 +31,6 @@ namespace ShareFun {
         protected global::System.Web.UI.WebControls.Label RegisteredLabel;
         
         /// <summary>
-        /// StarsCountLabel control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label StarsCountLabel;
-        
-        /// <summary>
         /// UserPostsLabel control.
         /// </summary>
         /// <remarks>

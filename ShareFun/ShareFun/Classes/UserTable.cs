@@ -101,6 +101,18 @@ namespace ShareFun.Classes
             return database.RowExists(commandText);
         }
 
+        public string GetRegistrationDate(string userId)
+        {
+            string commandText = "SELECT * FROM Users WHERE UserID = '" + userId + "'";
+            SqlDataReader reader = database.ExecuteReader(commandText, null);
+            if (reader.Read())
+            {
+                string date = reader["RegistrationDate"].ToString();
+                return date.Substring(0, date.IndexOf(" "));
+            }
+            return "ERROR";
+        }
+
         public bool CanSeePostSettings(string userId)
         {
             if (userId == null)
