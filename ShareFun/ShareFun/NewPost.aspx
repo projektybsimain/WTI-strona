@@ -26,7 +26,7 @@
         <asp:Button ID="Cancel" runat="server" Text="Cancel" OnClick="Cancel_Click" CssClass="btn btn-default" />
     </div>
 
-<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+<script type="text/javascript" src="/Scripts/jquery-1.8.3.min.js"></script>
 <script language="javascript" type="text/javascript">
 $(function () {
     $("#fileupload").change(function () {

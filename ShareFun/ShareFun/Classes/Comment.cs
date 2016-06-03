@@ -12,7 +12,8 @@ namespace ShareFun.Classes
         {
             TableRow row = new TableRow();
             TableCell cell = new TableCell();
-            cell.Text = "<h2>" + Text + "</h2><b>" + Author + "</b><p id=\"postdate\">" + Date + "</p>";
+            string date = Date.Substring(0, Date.IndexOf(" "));
+            cell.Text = "<h2>" + Text + "</h2><b>" + Author + "</b><p id=\"postdate\">" + date + "</p>";
             row.Cells.Add(cell);
             return row;
         }

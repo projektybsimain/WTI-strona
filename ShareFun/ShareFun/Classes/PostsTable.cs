@@ -30,79 +30,53 @@ namespace ShareFun.Classes
             return database.ExecuteScalar(commandText, null);
         }
 
-        public Stack<Post> GetPendingPosts()
+        private Stack<Post> GetPosts(string commandText)
         {
             Stack<Post> posts = new Stack<Post>();
-            string commandText = "SELECT * FROM Posts WHERE IsAccepted = 0";
             SqlDataReader reader = database.ExecuteReader(commandText, null);
             while (reader.Read())
             {
                 string id = reader["PostID"].ToString();
+                string authorId = reader["AuthorID"].ToString();
                 string title = reader["Title"].ToString();
                 string imagePath = reader["Image"].ToString();
                 string starsCount = reader["StarsCount"].ToString();
+                string date = reader["Date"].ToString();
+                date = date.Substring(0, date.IndexOf(" "));
                 Post post = new Post()
                 {
                     Id = id,
+                    AuthorID = authorId,
                     Title = title,
                     ImagePath = imagePath,
-                    Stars = starsCount
+                    Stars = starsCount,
+                    Date = date
                 };
                 posts.Push(post);
             }
             reader.Close();
             database.CloseConnection();
             return posts;
+        }
+
+        public Stack<Post> GetPendingPosts()
+        {
+             return GetPosts("SELECT * FROM Posts WHERE IsAccepted = 0");
         }
 
         public Stack<Post> GetBestPosts()
         {
-            Stack<Post> posts = new Stack<Post>();
-            string commandText = "SELECT * FROM Posts WHERE IsAccepted = 1 Order By StarsCount";
-            SqlDataReader reader = database.ExecuteReader(commandText, null);
-            while (reader.Read())
-            {
-                string id = reader["PostID"].ToString();
-                string title = reader["Title"].ToString();
-                string imagePath = reader["Image"].ToString();
-                string starsCount = reader["StarsCount"].ToString();
-                Post post = new Post()
-                {
-                    Id = id,
-                    Title = title,
-                    ImagePath = imagePath,
-                    Stars = starsCount
-                };
-                posts.Push(post);
-            }
-            reader.Close();
-            database.CloseConnection();
-            return posts;
+            return GetPosts("SELECT * FROM Posts WHERE IsAccepted = 1 Order By StarsCount");
         }
 
         public Stack<Post> GetLastPosts()
         {
-            Stack<Post> posts = new Stack<Post>();
-            string commandText = "SELECT * FROM Posts WHERE IsAccepted = 1 Order By PostID";
-            SqlDataReader reader = database.ExecuteReader(commandText, null);
-            while (reader.Read())
-            {
-                string id = reader["PostID"].ToString();
-                string title = reader["Title"].ToString();
-                string imagePath = reader["Image"].ToString();
-                string starsCount = reader["StarsCount"].ToString();
-                Post post = new Post()
-                {
-                    Id = id,
-                    Title = title,
-                    ImagePath = imagePath,
-                    Stars = starsCount
-                };
-                posts.Push(post);
-            }
-            reader.Close();
-            database.CloseConnection();
-            return posts;
+            return GetPosts("SELECT * FROM Posts WHERE IsAccepted = 1 Order By PostID");
+        }
+
+        public Stack<Post> GetPostsByUserID(string userID)
+        {
+            return GetPosts("SELECT * FROM Posts WHERE AuthorID = '" + userID + "' AND IsAccepted = 1");
         }
 
         public void AcceptPost(string postID)

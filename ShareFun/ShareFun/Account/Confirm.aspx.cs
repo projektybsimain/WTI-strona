@@ -16,16 +16,14 @@ namespace ShareFun.Account
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (User.Identity.IsAuthenticated)
-            {
-                Response.Redirect(Page.ResolveUrl("~/"));
-            }
-
+            // Pobranie unikalnego kodu weryfikacyjnego
             string code = IdentityHelper.GetCodeFromRequest(Request);
+            // Pobranie identyfikatora użytkownika dla którego przebiega weryfikacja
             string userId = IdentityHelper.GetUserIdFromRequest(Request);
             if (code != null && userId != null)
             {
                 var manager = Context.GetOwinContext().GetUserManager<ApplicationUserManager>();
+                // Potwierdzenie adresu e-mail, wpis danych do bazy oraz zwrócenie odpowiedniej wartości
                 var result = manager.ConfirmEmail(userId, code);
                 if (result.Succeeded)
                 {

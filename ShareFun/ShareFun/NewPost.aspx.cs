@@ -32,6 +32,11 @@ namespace ShareFun
             string userID = ApplicationUserStore.GetUserIDByName(manager, User);
             SqlDatabase sqlDatabase = new SqlDatabase();
             UserTable userTable = new UserTable(sqlDatabase);
+            if (!userTable.IsEmailConfirmed(userID))
+            {
+                ShowError("Please confirm your email address!");
+                return;
+            }
 
             string title = TitleTextBox.Text.Trim();
             string fileName = fileupload.PostedFile.FileName.Trim();

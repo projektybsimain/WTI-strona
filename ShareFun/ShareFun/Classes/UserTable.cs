@@ -1,7 +1,6 @@
 ﻿using ShareFun.Models;
 using System.Collections.Generic;
 using System.Data.SqlClient;
-using System.Diagnostics;
 
 namespace ShareFun.Classes
 {
@@ -25,6 +24,12 @@ namespace ShareFun.Classes
                 { "@pass", user.PasswordHash }
             };
             database.ExecuteNonQuery(commandText, parameters);
+        }
+
+        public bool Exist(string userName)
+        {
+            string commandText = "SELECT * FROM Users WHERE Login = '" + userName + "'";
+            return database.ExecuteScalar(commandText, null);
         }
 
         public void UpdatePassword(ApplicationUser user)
@@ -93,7 +98,7 @@ namespace ShareFun.Classes
         public bool IsEmailConfirmed(string userId)
         {
             string commandText = "SELECT * FROM Users WHERE UserID = '" + userId + "' AND IsVerified = 1";
-            return database.ExecuteScalar(commandText, null);
+            return database.RowExists(commandText);
         }
 
         public bool CanSeePostSettings(string userId)

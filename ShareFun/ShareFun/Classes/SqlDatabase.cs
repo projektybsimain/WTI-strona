@@ -2,10 +2,13 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
+using System.Diagnostics;
 
 public class SqlDatabase
 {
     private SqlConnection connection;
+
+    public object Debu { get; private set; }
 
     public SqlDatabase()
     {
@@ -41,6 +44,20 @@ public class SqlDatabase
             {
                 CloseConnection();
             }
+        }
+    }
+
+    public bool RowExists(string commandText)
+    {
+        SqlDataReader reader = ExecuteReader(commandText, null);
+        try
+        {
+            return reader.Read();
+        }
+        finally
+        {
+            reader.Close();
+            CloseConnection();
         }
     }
 

@@ -52,12 +52,22 @@ namespace ShareFun.Classes
 
         public Task<ApplicationUser> FindByIdAsync(string userId)
         {
-            throw new NotImplementedException();
+            List<ApplicationUser> result = userTable.GetUserByID(userId);
+            if (result != null && result.Count > 0)
+            {
+                return Task.FromResult<ApplicationUser>(result[0]);
+            }
+            return Task.FromResult<ApplicationUser>(null);
         }
 
         public Task<ApplicationUser> FindByNameAsync(string userName)
         {
-            throw new NotImplementedException();
+            List<ApplicationUser> result = userTable.GetUserByName(userName);
+            if (result != null && result.Count > 0)
+            {
+                return Task.FromResult<ApplicationUser>(result[0]);
+            }
+            return Task.FromResult<ApplicationUser>(null);
         }
 
         public Task UpdateAsync(ApplicationUser user)
@@ -137,12 +147,13 @@ namespace ShareFun.Classes
 
         public Task<DateTimeOffset> GetLockoutEndDateAsync(ApplicationUser user)
         {
-            throw new NotImplementedException();
+            DateTimeOffset dto = new DateTimeOffset();
+            return Task.FromResult(dto);
         }
 
         public Task SetLockoutEndDateAsync(ApplicationUser user, DateTimeOffset lockoutEnd)
         {
-            throw new NotImplementedException();
+            return Task.FromResult<object>(null);
         }
 
         public Task<int> IncrementAccessFailedCountAsync(ApplicationUser user)
@@ -162,7 +173,11 @@ namespace ShareFun.Classes
 
         public Task<bool> GetLockoutEnabledAsync(ApplicationUser user)
         {
-            return Task.FromResult(false);
+            string commandText = "SELECT * FROM Users WHERE UserID = '" + user.Id + "' AND IsLockedOut = 1";
+            bool result = Database.RowExists(commandText);
+            Debug.WriteLine("UserID: " + user.Id);
+            Debug.WriteLine("LOCKOUT: " + result);
+            return Task.FromResult(result);
         }
 
         public Task SetLockoutEnabledAsync(ApplicationUser user, bool enabled)

@@ -206,6 +206,7 @@
     <Content Include="Account\Confirm.aspx" />
     <Content Include="Account\Forgot.aspx" />
     <Content Include="BrowsePost.aspx" />
+    <Content Include="BrowseUser.aspx" />
     <Content Include="Images\image-icon.png" />
     <Content Include="Images\telefon.gif" />
     <Content Include="Images\tlo_menu.jpg" />
@@ -271,6 +272,7 @@
     <Content Include="packages.config" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
     <Content Include="Site.Mobile.Master" />
+    <Content Include="Scripts\jquery-1.8.3.min.js" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -285,6 +287,13 @@
     </Compile>
     <Compile Include="BrowsePost.aspx.designer.cs">
       <DependentUpon>BrowsePost.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="BrowseUser.aspx.cs">
+      <DependentUpon>BrowseUser.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="BrowseUser.aspx.designer.cs">
+      <DependentUpon>BrowseUser.aspx</DependentUpon>
     </Compile>
     <Compile Include="Classes\ApplicationUserStore.cs" />
     <Compile Include="Classes\Comment.cs" />

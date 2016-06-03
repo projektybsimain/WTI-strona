@@ -22,15 +22,6 @@ namespace ShareFun.Account {
         protected global::System.Web.UI.WebControls.PlaceHolder successPanel;
         
         /// <summary>
-        /// login control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.HyperLink login;
-        
-        /// <summary>
         /// errorPanel control.
         /// </summary>
         /// <remarks>
@@ -38,6 +29,5 @@ namespace ShareFun.Account {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.PlaceHolder errorPanel;
-
     }
 }
